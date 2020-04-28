@@ -8,7 +8,7 @@ echo "archlinux" > /etc/hostname
 #установка раскладки клавиатуры
 echo "KEYMAP=us" > /etc/vconsole.conf
 #установка шрифта 
-echo "FONT=ter-v18b" >> /etc/vconsole.conf
+echo "FONT=ter-v22b" >> /etc/vconsole.conf
 pacman -Sy --noconfirm terminus-font
 
 #установка локали
@@ -81,7 +81,7 @@ newpass=$(< /dev/urandom tr -dc "@#*%&_A-Z-a-z-0-9" | head -c16)
 ## - Установка приложений - ##
 
 #консоль
-pacman -Sy --noconfirm --needed bash-completion usbutils lsof dmidecode dialog
+pacman -Sy --noconfirm --needed bash-completion usbutils lsof dmidecode dialog xclip wget
 
 #архиваторы
 pacman -Sy --noconfirm --needed zip unzip unrar p7zip lzop
@@ -134,6 +134,10 @@ pacman -Sy --noconfirm --needed gnu-free-fonts
 #microsoft ttf fonts
 sudo -u aurbuilder yay -S --noconfirm --needed ttf-ms-fonts
 
+# big pack of google ttf fonts
+sudo -u aurbuilder yay -S --noconfirm --needed ttf-google-fonts-git
+
+
 # input drivers
 pacman -Sy --noconfirm --needed xf86-input-libinput
 
@@ -152,50 +156,51 @@ pacman -Sy --noconfirm --needed xf86-video-intel
 
 ## - ФИНАЛЬНЫЕ НАСТРОЙКИ СИСТЕМЫ - ##
 
-#редактор по умолчанию
-echo "export EDITOR=vim" > /etc/profile.d/editor.sh
-chmod 755 /etc/profile.d/editor.sh
+# #редактор по умолчанию
+# echo "export EDITOR=vim" > /etc/profile.d/editor.sh
+# chmod 755 /etc/profile.d/editor.sh
 
-#Aliases
-echo "alias vi='vim'" >> /etc/profile.d/alias.sh
-echo "alias ls='ls --color=auto -l --time-style long-iso'" >> /etc/profile.d/alias.sh
-echo "alias ll='ls --color=auto -la --time-style long-iso'" >> /etc/profile.d/alias.sh
-echo "alias grep='grep --color=auto'" >> /etc/profile.d/alias.sh
-echo "alias egrep='egrep --color=auto'" >> /etc/profile.d/alias.sh
-echo "alias fgrep='fgrep --color=auto'" >> /etc/profile.d/alias.sh
-echo "alias ip='ip -c'" >> /etc/profile.d/alias.sh
+# #Aliases
+# echo "alias sudo='sudo '" >> /etc/profile.d/alias.sh
+# echo "alias vi='vim'" >> /etc/profile.d/alias.sh
+# echo "alias ls='ls --color=auto -l --time-style long-iso'" >> /etc/profile.d/alias.sh
+# echo "alias ll='ls --color=auto -la --time-style long-iso'" >> /etc/profile.d/alias.sh
+# echo "alias grep='grep --color=auto'" >> /etc/profile.d/alias.sh
+# echo "alias egrep='egrep --color=auto'" >> /etc/profile.d/alias.sh
+# echo "alias fgrep='fgrep --color=auto'" >> /etc/profile.d/alias.sh
+# echo "alias ip='ip -c'" >> /etc/profile.d/alias.sh
 
-echo "alias pacman='pacman --color auto'" >> /etc/profile.d/alias.sh
-echo "alias pactree='pactree --color'" >> /etc/profile.d/alias.sh
-echo "alias yay='sudo -u aurbuilder yay'" >> /etc/profile.d/alias.sh
-echo "alias vdir='vdir --color=auto'" >> /etc/profile.d/alias.sh
-echo "alias watch='watch --color'" >> /etc/profile.d/alias.sh
+# echo "alias pacman='pacman --color auto'" >> /etc/profile.d/alias.sh
+# echo "alias pactree='pactree --color'" >> /etc/profile.d/alias.sh
+# echo "alias yay='sudo -u aurbuilder yay'" >> /etc/profile.d/alias.sh
+# echo "alias vdir='vdir --color=auto'" >> /etc/profile.d/alias.sh
+# echo "alias watch='watch --color'" >> /etc/profile.d/alias.sh
 
-echo 'man() {' >> /etc/profile.d/alias.sh
-			echo '	env \' >> /etc/profile.d/alias.sh
-			echo '		LESS_TERMCAP_mb=$(printf "\e[1;31m") \' >> /etc/profile.d/alias.sh
-			echo '		LESS_TERMCAP_md=$(printf "\e[1;31m") \' >> /etc/profile.d/alias.sh
-			echo '		LESS_TERMCAP_me=$(printf "\e[0m") \' >> /etc/profile.d/alias.sh
-			echo '		LESS_TERMCAP_se=$(printf "\e[0m") \' >> /etc/profile.d/alias.sh
-			echo '		LESS_TERMCAP_so=$(printf "\e[1;44;33m") \' >> /etc/profile.d/alias.sh
-			echo '		LESS_TERMCAP_ue=$(printf "\e[0m") \' >> /etc/profile.d/alias.sh
-			echo '		LESS_TERMCAP_us=$(printf "\e[1;32m") \' >> /etc/profile.d/alias.sh
-			echo '			man "$@"' >> /etc/profile.d/alias.sh
-			echo '}' >> /etc/profile.d/alias.sh
+# echo 'man() {' >> /etc/profile.d/alias.sh
+# 			echo '	env \' >> /etc/profile.d/alias.sh
+# 			echo '		LESS_TERMCAP_mb=$(printf "\e[1;31m") \' >> /etc/profile.d/alias.sh
+# 			echo '		LESS_TERMCAP_md=$(printf "\e[1;31m") \' >> /etc/profile.d/alias.sh
+# 			echo '		LESS_TERMCAP_me=$(printf "\e[0m") \' >> /etc/profile.d/alias.sh
+# 			echo '		LESS_TERMCAP_se=$(printf "\e[0m") \' >> /etc/profile.d/alias.sh
+# 			echo '		LESS_TERMCAP_so=$(printf "\e[1;44;33m") \' >> /etc/profile.d/alias.sh
+# 			echo '		LESS_TERMCAP_ue=$(printf "\e[0m") \' >> /etc/profile.d/alias.sh
+# 			echo '		LESS_TERMCAP_us=$(printf "\e[1;32m") \' >> /etc/profile.d/alias.sh
+# 			echo '			man "$@"' >> /etc/profile.d/alias.sh
+# 			echo '}' >> /etc/profile.d/alias.sh
 
 
-# ps1
-cat > /etc/profile.d/ps1.sh << "EOF"
-#!/bin/bash
-clrreset='\e[0m'
-clrwhite='\e[1;37m'
-clrgreen='\e[1;32m'
-clrred='\e[1;31m'
-export PS1="\[$clrwhite\]\w \`if [ \$? = 0 ]; then echo -e '\[$clrgreen\]'; else echo -e '\[$clrred\]'; fi\`\\$ \[$clrreset\]"
-EOF
-chmod 755 /etc/profile.d/ps1.sh
+# # ps1
+# cat > /etc/profile.d/ps1.sh << "EOF"
+# #!/bin/bash
+# clrreset='\e[0m'
+# clrwhite='\e[1;37m'
+# clrgreen='\e[1;32m'
+# clrred='\e[1;31m'
+# export PS1="\[$clrwhite\]\w \`if [ \$? = 0 ]; then echo -e '\[$clrgreen\]'; else echo -e '\[$clrred\]'; fi\`\\$ \[$clrreset\]"
+# EOF
+# chmod 755 /etc/profile.d/ps1.sh
 
-grep -q -F 'source /etc/profile.d/ps1.sh' /etc/bash.bashrc || echo 'source /etc/profile.d/ps1.sh' >> /etc/bash.bashrc
+# grep -q -F 'source /etc/profile.d/ps1.sh' /etc/bash.bashrc || echo 'source /etc/profile.d/ps1.sh' >> /etc/bash.bashrc
 
 
 ###
@@ -210,7 +215,7 @@ echo "Enter password for user aex:"
 passwd aex
 
 #добавление пользователя в группу sudo
-#echo "aex ALL=(ALL) ALL" > /etc/sudoers.d/aex
-#echo "aex ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/aex
+echo "aex ALL=(ALL) ALL" > /etc/sudoers.d/aex
+echo "aex ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/aex
 
 # 
