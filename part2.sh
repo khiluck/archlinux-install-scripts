@@ -125,7 +125,7 @@ systemctl enable org.cups.cupsd
 
 ## - XOrg - ##
 
-pacman -Sy --noconfirm --needed xorg-server xorg-xinit
+pacman -Sy --noconfirm --needed xorg-server xorg-xinit xorg
 
 #fonts
 pacman -Sy --noconfirm --needed font-bh-ttf font-bitstream-speedo gsfonts sdl_ttf ttf-bitstream-vera ttf-dejavu ttf-liberation xorg-fonts-type1
@@ -137,6 +137,8 @@ sudo -u aurbuilder yay -S --noconfirm --needed ttf-ms-fonts
 # big pack of google ttf fonts
 sudo -u aurbuilder yay -S --noconfirm --needed ttf-google-fonts-git
 
+# terminus ttf fonts
+sudo -u aurbuilder yay -S --noconfirm --needed terminus-font-ttf
 
 # input drivers
 pacman -Sy --noconfirm --needed xf86-input-libinput
