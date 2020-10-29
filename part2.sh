@@ -22,8 +22,15 @@ locale-gen
 
 #установка времени
 ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
+
+
+timedatectl set-ntp true
+timedatectl status
+
+
 #UTC синхронизация
 hwclock --systohc --utc
+
 
 
 #Grub install
