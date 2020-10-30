@@ -1,5 +1,13 @@
 #!/bin/bash
 
+cat << EOF2 > /etc/pacman.d/mirrorlist
+Server = https://archlinux.ip-connect.vn.ua/$repo/os/$arch
+#Server = http://mirror.mirohost.net/archlinux/$repo/os/$arch
+Server = https://mirror.mirohost.net/archlinux/$repo/os/$arch
+#Server = http://mirrors.nix.org.ua/linux/archlinux/$repo/os/$arch
+Server = https://mirrors.nix.org.ua/linux/archlinux/$repo/os/$arch
+EOF2
+
 #установка шрифтов, чтоб я мог что-то видеть
 pacman -Sy --noconfirm terminus-font
 setfont ter-v22b
