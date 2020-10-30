@@ -8,7 +8,7 @@ echo "archlinux" > /etc/hostname
 #установка раскладки клавиатуры
 echo "KEYMAP=us" > /etc/vconsole.conf
 #установка шрифта 
-echo "FONT=ter-v22b" >> /etc/vconsole.conf
+echo "FONT=ter-v32n" >> /etc/vconsole.conf
 pacman -Sy --noconfirm terminus-font
 
 #установка локали
@@ -29,7 +29,7 @@ timedatectl status
 
 
 #UTC синхронизация
-hwclock --systohc --utc
+#hwclock --systohc --utc
 
 
 
@@ -40,7 +40,7 @@ pacman -Sy --noconfirm --needed efibootmgr
 
 mkdir /boot/grub
 grub-mkconfig -o /boot/grub/grub.cfg
-grub-install --target=x86_64-efi --efi-directory=/boot --recheck /dev/sda
+grub-install --target=x86_64-efi --efi-directory=/boot --recheck
 
 
 
@@ -106,8 +106,8 @@ pacman -Sy --noconfirm --needed networkmanager openssh cronie xdg-user-dirs have
 
 
 #cpu microcode
-pacman -Sy --noconfirm --needed intel-ucode
-#pacman -Sy --noconfirm --needed amd-ucode
+#pacman -Sy --noconfirm --needed intel-ucode
+pacman -Sy --noconfirm --needed amd-ucode
 
 #пересобираем конфиг для grub, после установки ucode для процессора
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -157,7 +157,7 @@ pacman -Sy --noconfirm --needed xf86-input-libinput
 #show all open-source drivers
 #pacman -Ssq xf86-video
 #устанавливаем нужные
-pacman -Sy --noconfirm --needed xf86-video-intel
+pacman -Sy --noconfirm --needed xf86-video-amdgpu
 
 #если амд - xf86-video-amdgpu
 #если нвидиа, то - nvidia (проприетарные)
