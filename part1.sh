@@ -1,16 +1,16 @@
 #!/bin/bash
 
 cat << EOF2 > /etc/pacman.d/mirrorlist
-Server = https://archlinux.ip-connect.vn.ua/$repo/os/$arch
-#Server = http://mirror.mirohost.net/archlinux/$repo/os/$arch
-Server = https://mirror.mirohost.net/archlinux/$repo/os/$arch
-#Server = http://mirrors.nix.org.ua/linux/archlinux/$repo/os/$arch
-Server = https://mirrors.nix.org.ua/linux/archlinux/$repo/os/$arch
+Server = https://archlinux.ip-connect.vn.ua/\$repo/os/\$arch
+#Server = http://mirror.mirohost.net/archlinux/\$repo/os/\$arch
+Server = https://mirror.mirohost.net/archlinux/\$repo/os/\$arch
+#Server = http://mirrors.nix.org.ua/linux/archlinux/\$repo/os/\$arch
+Server = https://mirrors.nix.org.ua/linux/archlinux/\$repo/os/\$arch
 EOF2
 
 #установка шрифтов, чтоб я мог что-то видеть
 pacman -Sy --noconfirm terminus-font
-setfont ter-v22b
+setfont ter-v32n
 
 #установка локали
 echo "LANG=ru_UA.UTF-8" > /etc/locale.conf
@@ -29,13 +29,13 @@ export EDITOR=vim
 #/dev/sda2	+GB - Linux filesystem	(root)		ext4		
 
 #Форматирование разделов
-mkfs.fat /dev/sda1
-mkfs.ext4 -F /dev/sda2
+#mkfs.fat /dev/sda1
+#mkfs.ext4 -F /dev/sda2
 
 #Монтирование 
-mount /dev/sda2 /mnt
-mkdir /mnt/boot
-mount /dev/sda1 /mnt/boot
+#mount /dev/sda2 /mnt
+#mkdir /mnt/boot
+#mount /dev/sda1 /mnt/boot
 
 
 #Установка 
