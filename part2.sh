@@ -37,10 +37,13 @@ timedatectl status
 #bootloader grub установка
 pacman -Sy --noconfirm --needed grub
 pacman -Sy --noconfirm --needed efibootmgr
+pacman -Sy --noconfirm --needed os-prober
 
 mkdir /boot/grub
+grub-install --target=x86_64-efi --efi-directory=/boot --recheck /dev/sda
+os-prober
 grub-mkconfig -o /boot/grub/grub.cfg
-grub-install --target=x86_64-efi --efi-directory=/boot --recheck
+
 
 
 
