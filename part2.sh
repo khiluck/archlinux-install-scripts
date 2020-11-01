@@ -232,3 +232,8 @@ echo "aex ALL=(ALL) ALL" > /etc/sudoers.d/aex
 echo "aex ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/aex
 
 # 
+
+#отключаем pc speaker beep
+rmmod pcspkr
+echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
+
