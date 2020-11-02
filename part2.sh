@@ -32,6 +32,10 @@ timedatectl status
 #hwclock --systohc --utc
 
 
+# regenerate mkinitcpio.conf
+mkinitcpio -P
+
+
 
 #Grub install
 #bootloader grub установка
