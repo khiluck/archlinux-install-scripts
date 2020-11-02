@@ -110,7 +110,7 @@ pacman -Sy --noconfirm --needed rsync traceroute bind-tools nmap
 pacman -Sy --noconfirm --needed linux-headers
 
 #services
-pacman -Sy --noconfirm --needed networkmanager openssh cronie xdg-user-dirs haveged
+pacman -Sy --noconfirm --needed networkmanager openssh cronie xdg-user-dirs haveged acpi
 
 
 #cpu microcode
