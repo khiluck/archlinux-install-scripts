@@ -43,6 +43,8 @@ export EDITOR=vim
 # edit /etc/mkinitcpio.conf and change to 
 # HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block sd-encrypt filesystems fsck)
 #
+# add to /etc/default/grub
+# GRUB_CMDLINE_LINUX="rd.luks.name=physical_device_UUID_like_sda3=cryptroot root=/dev/mapper/cryptroot"
 # LUKS END
 
 

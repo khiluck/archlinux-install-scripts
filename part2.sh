@@ -24,12 +24,13 @@ locale-gen
 ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
 
 
+
+#UTC синхронизация
+hwclock --systohc --utc
+
 timedatectl set-ntp true
 timedatectl status
 
-
-#UTC синхронизация
-#hwclock --systohc --utc
 
 
 # regenerate mkinitcpio.conf
