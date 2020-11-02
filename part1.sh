@@ -32,6 +32,20 @@ export EDITOR=vim
 #mkfs.fat /dev/sda1
 #mkfs.ext4 -F /dev/sda2
 
+# IF you need encrypted partition...
+# LUKS encrypt partition
+#cryptsetup -y -v luksFormat /dev/sda3
+#cryptsetup open /dev/sda3 cryptroot
+#mkfs.ext4 /dev/mapper/cryptroot
+#mount /dev/mapper/cryptroot /mnt
+#
+# install pacstrap as usual, and then in arch-chroot 
+# edit /etc/mkinitcpio.conf and change to 
+# HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block sd-encrypt filesystems fsck)
+#
+# LUKS END
+
+
 #Монтирование 
 #mount /dev/sda2 /mnt
 #mkdir /mnt/boot
@@ -43,11 +57,6 @@ pacstrap /mnt base linux linux-firmware
 
 #генерируем fstab
 genfstab -U -p /mnt > /mnt/etc/fstab
-
-
-
-
-
 
 
 
