@@ -24,3 +24,8 @@ objcopy \
 	--add-section .initrd="/boot/initrd.img" --change-section-vma .initrd=0x3000000 \
 	/usr/lib/systemd/boot/efi/linuxx64.efi.stub /boot/EFI/BOOT/BOOTX64.EFI
 sbsign --key ${SBKEYS}/db.key --cert ${SBKEYS}/db.crt --output /boot/EFI/BOOT/BOOTX64.EFI /boot/EFI/BOOT/BOOTX64.EFI
+
+
+
+#
+Echo Q
