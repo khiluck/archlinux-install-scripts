@@ -156,6 +156,9 @@ sudo -u aurbuilder yay -S --noconfirm --needed ttf-ms-fonts
 # terminus ttf fonts
 sudo -u aurbuilder yay -S --noconfirm --needed terminus-font-ttf
 
+# Monaco ttf font
+sudo -u aurbuilder yay -S --noconfirm --needed ttf-monaco
+
 # input drivers
 pacman -Sy --noconfirm --needed xf86-input-libinput
 
