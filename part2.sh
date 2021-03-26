@@ -143,9 +143,9 @@ systemctl enable org.cups.cupsd
 pacman -Sy --noconfirm --needed xorg-server xorg-xinit xorg
 
 #fonts
-pacman -Sy --noconfirm --needed ttf-linux-libertine ttf-inconsolata noto-fonts
+pacman -Sy --noconfirm --needed ttf-linux-libertine ttf-inconsolata noto-fonts ttf-joypixels
 pacman -Sy --noconfirm --needed font-bh-ttf font-bitstream-speedo gsfonts sdl_ttf ttf-bitstream-vera ttf-dejavu ttf-liberation xorg-fonts-type1
-pacman -Sy --noconfirm --needed gnu-free-fonts
+pacman -Sy --noconfirm --needed gnu-free-fonts ttf-linux-libertine-g
 
 #microsoft ttf fonts
 sudo -u aurbuilder yay -S --noconfirm --needed ttf-ms-fonts
@@ -156,8 +156,15 @@ sudo -u aurbuilder yay -S --noconfirm --needed ttf-ms-fonts
 # terminus ttf fonts
 sudo -u aurbuilder yay -S --noconfirm --needed terminus-font-ttf
 
-# Monaco ttf font
-sudo -u aurbuilder yay -S --noconfirm --needed ttf-monaco
+# unicode fonts
+sudo -u aurbuilder yay -S --noconfirm --needed ttf-dejavu noto-fonts noto-fonts-emoji
+
+#reload the font cache
+fc-cache -vf
+
+# fix emoji in st
+sudo -u aurbuilder yay -S --noconfirm --needed libxft-bgra
+
 
 # input drivers
 pacman -Sy --noconfirm --needed xf86-input-libinput
