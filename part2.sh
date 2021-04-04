@@ -176,6 +176,8 @@ pacman -Sy --noconfirm --needed xf86-input-libinput
 #pacman -Ssq xf86-video
 #устанавливаем нужные
 pacman -Sy --noconfirm --needed xf86-video-amdgpu
+# hardware encode/decode video
+pacman -Sy --noconfirm --needed libva-vdpau-driver lib32-libva-vdpau-driver libvdpau-va-gl
 
 #если амд - xf86-video-amdgpu
 #если нвидиа, то - nvidia (проприетарные)
@@ -252,3 +254,21 @@ echo "aex ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/aex
 rmmod pcspkr
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 
+
+
+# Extend notebook battery life
+pacman -Sy --noconfirm --needed powertop
+
+cat << EOF2 > /usr/lib/systemd/system/powertop.service
+[Unit]
+Description=Powertop tunings
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/powertop --auto-tune
+
+[Install]
+WantedBy=multi-user.target
+EOF2
+
+systemctl enable powertop
