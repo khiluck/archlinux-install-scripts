@@ -254,21 +254,3 @@ echo "aex ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/aex
 rmmod pcspkr
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 
-
-
-# Extend notebook battery life
-pacman -Sy --noconfirm --needed powertop
-
-cat << EOF2 > /usr/lib/systemd/system/powertop.service
-[Unit]
-Description=Powertop tunings
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/powertop --auto-tune
-
-[Install]
-WantedBy=multi-user.target
-EOF2
-
-systemctl enable powertop
