@@ -26,7 +26,7 @@ ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
 
 
 #UTC синхронизация
-hwclock --systohc --utc
+hwclock --systohc
 
 timedatectl set-ntp true
 timedatectl status
