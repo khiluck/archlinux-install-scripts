@@ -34,6 +34,8 @@ timedatectl status
 
 
 # regenerate mkinitcpio.conf
+# IF Video is INTEL add i915 to modules
+#sed -i 's/MODULES=()/MODULES=(i915)/' /etc/mkinitcpio.conf
 mkinitcpio -P
 
 
@@ -140,7 +142,7 @@ systemctl enable org.cups.cupsd
 
 ## - XOrg - ##
 
-pacman -Sy --noconfirm --needed xorg-server xorg-xinit xorg
+pacman -Sy --noconfirm --needed xorg-server xorg-xinit xorg xorg-drivers mesa 
 
 #fonts
 pacman -Sy --noconfirm --needed ttf-linux-libertine ttf-inconsolata noto-fonts ttf-joypixels
@@ -176,6 +178,10 @@ pacman -Sy --noconfirm --needed xf86-input-libinput
 #pacman -Ssq xf86-video
 #устанавливаем нужные
 pacman -Sy --noconfirm --needed xf86-video-amdgpu
+
+#if intel
+#pacman -Sy --noconfirm libva-utils intel-media-driver
+
 # hardware encode/decode video
 pacman -Sy --noconfirm --needed libva-vdpau-driver lib32-libva-vdpau-driver libvdpau-va-gl
 
