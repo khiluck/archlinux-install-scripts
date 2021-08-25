@@ -180,6 +180,8 @@ pacman -Sy --noconfirm --needed xf86-input-libinput
 pacman -Sy --noconfirm --needed xf86-video-amdgpu
 
 #if intel
+#Remove buggy driver
+#pacman -R --noconfirm xf86-video-intel
 #pacman -Sy --noconfirm libva-utils intel-media-driver
 
 # hardware encode/decode video
