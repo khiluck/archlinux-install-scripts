@@ -165,7 +165,7 @@ sudo -u aurbuilder yay -S --noconfirm --needed ttf-dejavu noto-fonts noto-fonts-
 fc-cache -vf
 
 # fix emoji in st
-sudo -u aurbuilder yay -S --noconfirm --needed libxft-bgra
+sudo -u aurbuilder yay -Sy --noconfirm --needed libxft-bgra
 
 
 # input drivers
