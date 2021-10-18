@@ -8,7 +8,7 @@ echo "archlinux" > /etc/hostname
 #установка раскладки клавиатуры
 echo "KEYMAP=us" > /etc/vconsole.conf
 #установка шрифта 
-echo "FONT=ter-v32n" >> /etc/vconsole.conf
+#echo "FONT=ter-v32n" >> /etc/vconsole.conf
 pacman -Sy --noconfirm terminus-font
 
 #установка локали
@@ -116,8 +116,8 @@ pacman -Sy --noconfirm --needed networkmanager openssh cronie xdg-user-dirs have
 
 
 #cpu microcode
-#pacman -Sy --noconfirm --needed intel-ucode
-pacman -Sy --noconfirm --needed amd-ucode
+pacman -Sy --noconfirm --needed intel-ucode
+#pacman -Sy --noconfirm --needed amd-ucode
 
 #пересобираем конфиг для grub, после установки ucode для процессора
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -141,6 +141,7 @@ systemctl enable org.cups.cupsd
 
 
 ## - XOrg - ##
+pacman -Sy --noconfirm --needed nvidia-390xx-dkms lib32-nvidia-utils
 
 pacman -Sy --noconfirm --needed xorg-server xorg-xinit xorg xorg-drivers mesa 
 
@@ -177,7 +178,7 @@ pacman -Sy --noconfirm --needed xf86-input-libinput
 #show all open-source drivers
 #pacman -Ssq xf86-video
 #устанавливаем нужные
-pacman -Sy --noconfirm --needed xf86-video-amdgpu
+#pacman -Sy --noconfirm --needed xf86-video-amdgpu
 
 #if intel
 #Remove buggy driver
@@ -189,7 +190,11 @@ pacman -Sy --noconfirm --needed libva-vdpau-driver lib32-libva-vdpau-driver libv
 
 #если амд - xf86-video-amdgpu
 #если нвидиа, то - nvidia (проприетарные)
-#pacman -Sy --noconfirm --needed nvidia
+#pacman -Sy --noconfirm --needed nvidia-390xx-dkms lib32-nvidia-utils openal lib32-openal
+
+#### Install additional packages
+pacman -Sy --noconfirm --needed vim mc chromium pavucontrol glu lib32-openal util-linux pamixer feh xcompmgr freerdp sxiv galculator mpv clipmenu youtube-dl
+
 
 
 ## - ФИНАЛЬНЫЕ НАСТРОЙКИ СИСТЕМЫ - ##
@@ -262,3 +267,16 @@ echo "aex ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/aex
 rmmod pcspkr
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 
+
+
+# User autologin
+sed -i -e 's/#NAutoVTs=6/NAutoVTs=6/' /etc/systemd/logind.conf
+mkdir /etc/systemd/system/getty@tty1.service.d
+
+cat << EOF555 > /etc/systemd/system/getty@tty1.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=-/usr/bin/agetty --autologin aex --noclear %I \$TERM
+EOF555
+
+systemctl enable getty@tty1.service

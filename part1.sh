@@ -10,7 +10,7 @@ EOF2
 
 #установка шрифтов, чтоб я мог что-то видеть
 pacman -Sy --noconfirm terminus-font
-setfont ter-v32n
+#setfont ter-v32n
 
 #установка локали
 echo "LANG=ru_UA.UTF-8" > /etc/locale.conf
