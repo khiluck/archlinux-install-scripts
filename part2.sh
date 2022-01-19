@@ -8,7 +8,7 @@ echo "archlinux" > /etc/hostname
 #установка раскладки клавиатуры
 echo "KEYMAP=us" > /etc/vconsole.conf
 #установка шрифта 
-#echo "FONT=ter-v32n" >> /etc/vconsole.conf
+echo "FONT=ter-v32n" >> /etc/vconsole.conf
 pacman -Sy --noconfirm terminus-font
 
 #установка локали
@@ -141,7 +141,7 @@ systemctl enable org.cups.cupsd
 
 
 ## - XOrg - ##
-pacman -Sy --noconfirm --needed nvidia-390xx-dkms lib32-nvidia-utils
+#pacman -Sy --noconfirm --needed nvidia-390xx-dkms lib32-nvidia-utils
 
 pacman -Sy --noconfirm --needed xorg-server xorg-xinit xorg xorg-drivers mesa 
 
@@ -183,7 +183,7 @@ pacman -Sy --noconfirm --needed xf86-input-libinput
 #if intel
 #Remove buggy driver
 #pacman -R --noconfirm xf86-video-intel
-#pacman -Sy --noconfirm libva-utils intel-media-driver
+pacman -Sy --noconfirm libva-utils intel-media-driver
 
 # hardware encode/decode video
 pacman -Sy --noconfirm --needed libva-vdpau-driver lib32-libva-vdpau-driver libvdpau-va-gl
