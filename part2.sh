@@ -98,7 +98,7 @@ newpass=$(< /dev/urandom tr -dc "@#*%&_A-Z-a-z-0-9" | head -c16)
 ## - Установка приложений - ##
 
 #консоль
-pacman -Sy --noconfirm --needed bash-completion usbutils lsof dmidecode dialog xclip wget
+pacman -Sy --noconfirm --needed bash-completion usbutils lsof dmidecode dialog xclip flameshot wget
 
 #архиваторы
 pacman -Sy --noconfirm --needed zip unzip unrar p7zip lzop
