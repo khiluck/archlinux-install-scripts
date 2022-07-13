@@ -47,6 +47,9 @@ export EDITOR=vim
 # GRUB_CMDLINE_LINUX="rd.luks.name=physical_device_UUID_like_sda3=cryptroot root=/dev/mapper/cryptroot"
 # LUKS END
 
+# Disable ipv6
+# in /etc/default/grub add string to 'GRUB_CMDLINE_LINUX=' line
+# ipv6.disable=1
 
 #Монтирование 
 #mount /dev/sda2 /mnt
