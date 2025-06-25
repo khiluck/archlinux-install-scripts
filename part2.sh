@@ -21,12 +21,13 @@ echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
 
 #установка времени
-ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
+#ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
+ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
 
 
 #UTC синхронизация
-hwclock --systohc
+#hwclock --systohc
 
 timedatectl set-ntp true
 timedatectl status
@@ -58,7 +59,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 # установка зависимостей
 pacman -Sy --noconfirm --needed libnewt
-pacman -Sy --noconfirm --needed dhcpcd
+#pacman -Sy --noconfirm --needed dhcpcd
 pacman -Sy --noconfirm --needed pacman-contrib
 pacman -Sy --noconfirm --needed base-devel
 pacman -Sy --noconfirm --needed git
@@ -112,7 +113,8 @@ pacman -Sy --noconfirm --needed rsync traceroute bind-tools nmap
 pacman -Sy --noconfirm --needed linux-headers
 
 #services
-pacman -Sy --noconfirm --needed networkmanager openssh cronie xdg-user-dirs haveged acpi
+#pacman -Sy --noconfirm --needed networkmanager openssh cronie xdg-user-dirs haveged acpi
+pacman -Sy --noconfirm --needed openssh cronie xdg-user-dirs haveged acpi
 
 
 #cpu microcode
@@ -123,21 +125,24 @@ pacman -Sy --noconfirm --needed intel-ucode
 grub-mkconfig -o /boot/grub/grub.cfg
 
 #start services at boot
-systemctl enable NetworkManager
-systemctl disable dhcpcd
+#systemctl enable NetworkManager
+#systemctl disable dhcpcd
 systemctl enable cronie
 systemctl enable haveged
 
 #filesystem support install
-pacman -Sy --noconfirm --needed f2fs-tools dosfstools ntfs-3g btrfs-progs exfat-utils gptfdisk autofs fuse2 fuse3 fuseiso sshfs cifs-utils smbclient
+pacman -Sy --noconfirm --needed f2fs-tools dosfstools ntfs-3g btrfs-progs exfat-utils gptfdisk fuse2 fuse3 fuseiso sshfs cifs-utils smbclient
+sudo -u aurbuilder yay -S --noconfirm --needed autofs
+
 
 #sound
-pacman -Sy --noconfirm --needed alsa-utils alsa-plugins pulseaudio pulseaudio-alsa pulseaudio-bluetooth
+#pacman -Sy --noconfirm --needed alsa-utils alsa-plugins pulseaudio pulseaudio-alsa pulseaudio-bluetooth
+pacman -Sy --noconfirm --needed alsa-utils
 
 #print support
-pacman -Sy --noconfirm --needed cups ghostscript cups-pdf
+#pacman -Sy --noconfirm --needed cups ghostscript cups-pdf
 #start cups service at boot
-systemctl enable org.cups.cupsd
+#systemctl enable org.cups.cupsd
 
 
 ## - XOrg - ##
@@ -146,8 +151,10 @@ systemctl enable org.cups.cupsd
 pacman -Sy --noconfirm --needed xorg-server xorg-xinit xorg xorg-drivers mesa 
 
 #fonts
-pacman -Sy --noconfirm --needed ttf-linux-libertine ttf-inconsolata noto-fonts ttf-joypixels
-pacman -Sy --noconfirm --needed font-bh-ttf font-bitstream-speedo gsfonts sdl_ttf ttf-bitstream-vera ttf-dejavu ttf-liberation xorg-fonts-type1
+pacman -Sy --noconfirm --needed ttf-linux-libertine ttf-inconsolata noto-fonts 
+sudo -u aurbuilder yay -S --noconfirm --needed ttf-joypixels
+pacman -Sy --noconfirm --needed gsfonts sdl_ttf ttf-bitstream-vera ttf-dejavu ttf-liberation xorg-fonts-type1
+sudo -u aurbuilder yay -S --noconfirm --needed font-bh-ttf font-bitstream-speedo
 pacman -Sy --noconfirm --needed gnu-free-fonts ttf-linux-libertine-g
 
 #microsoft ttf fonts
@@ -186,15 +193,16 @@ pacman -Sy --noconfirm --needed xf86-input-libinput
 pacman -Sy --noconfirm libva-utils intel-media-driver
 
 # hardware encode/decode video
-pacman -Sy --noconfirm --needed libva-vdpau-driver lib32-libva-vdpau-driver libvdpau-va-gl
+pacman -Sy --noconfirm --needed libvdpau-va-gl
+sudo -u aurbuilder yay -Sy --noconfirm --needed libva-vdpau-driver lib32-libva-vdpau-driver 
 
 #если амд - xf86-video-amdgpu
 #если нвидиа, то - nvidia (проприетарные)
 #pacman -Sy --noconfirm --needed nvidia-390xx-dkms lib32-nvidia-utils openal lib32-openal
 
 #### Install additional packages
-pacman -Sy --noconfirm --needed vim mc chromium pavucontrol glu lib32-openal util-linux pamixer feh xcompmgr freerdp sxiv galculator mpv clipmenu youtube-dl
-
+pacman -Sy --noconfirm --needed vim mc chromium pavucontrol glu util-linux pamixer feh xcompmgr freerdp sxiv galculator mpv clipmenu
+pacman -Sy --noconfirm --needed libnotify dunst feh clipmenu flameshot xcompmgr 
 
 
 ## - ФИНАЛЬНЫЕ НАСТРОЙКИ СИСТЕМЫ - ##
