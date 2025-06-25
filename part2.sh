@@ -157,6 +157,9 @@ pacman -Sy --noconfirm --needed gsfonts sdl_ttf ttf-bitstream-vera ttf-dejavu tt
 sudo -u aurbuilder yay -S --noconfirm --needed font-bh-ttf font-bitstream-speedo
 pacman -Sy --noconfirm --needed gnu-free-fonts ttf-linux-libertine-g
 
+#SF Mono Powerline
+sudo -u aurbuilder yay -S --noconfirm --needed otf-sfmono-patched
+
 #microsoft ttf fonts
 sudo -u aurbuilder yay -S --noconfirm --needed ttf-ms-fonts
 
