@@ -63,7 +63,7 @@ pacman -Sy --noconfirm --needed libnewt
 pacman -Sy --noconfirm --needed pacman-contrib
 pacman -Sy --noconfirm --needed base-devel
 pacman -Sy --noconfirm --needed git
-pacman -Sy --noconfirm --needed vim
+pacman -Sy --noconfirm --needed nvim
 pacman -Sy --noconfirm --needed man
 
 ## создаем пользователя aurbuilder для компиляции yay, т.к. из под root это сделать нельзя!
@@ -201,7 +201,7 @@ sudo -u aurbuilder yay -Sy --noconfirm --needed libva-vdpau-driver lib32-libva-v
 #pacman -Sy --noconfirm --needed nvidia-390xx-dkms lib32-nvidia-utils openal lib32-openal
 
 #### Install additional packages
-pacman -Sy --noconfirm --needed vim mc chromium pavucontrol glu util-linux pamixer feh xcompmgr freerdp sxiv galculator mpv clipmenu
+pacman -Sy --noconfirm --needed nvim mc chromium pavucontrol glu util-linux pamixer feh xcompmgr freerdp sxiv galculator mpv clipmenu
 pacman -Sy --noconfirm --needed libnotify dunst feh clipmenu flameshot xcompmgr 
 
 
