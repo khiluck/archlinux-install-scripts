@@ -205,7 +205,8 @@ sudo -u aurbuilder yay -Sy --noconfirm --needed libva-vdpau-driver lib32-libva-v
 
 #### Install additional packages
 pacman -Sy --noconfirm --needed nvim mc chromium pavucontrol glu util-linux pamixer feh xcompmgr freerdp sxiv galculator mpv clipmenu
-pacman -Sy --noconfirm --needed libnotify dunst feh clipmenu flameshot xcompmgr yt-dlp
+pacman -Sy --noconfirm --needed libnotify dunst feh clipmenu flameshot xcompmgr yt-dlp x11-ssh-askpass
+sudo -u aurbuilder yay -Sy --noconfirm --needed fswebcam
 
 
 ## - ФИНАЛЬНЫЕ НАСТРОЙКИ СИСТЕМЫ - ##
